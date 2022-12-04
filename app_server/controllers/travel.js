@@ -1,6 +1,6 @@
 const request = require('request');
 const apiOptions = {
-    server: 'https://localhost:3000'
+    server: 'http://localhost:3000'
 };
 
 /* internal method to render the travel list */
@@ -48,7 +48,7 @@ const travelList = (req, res) => {
 
 // WAS OPTIONAL -- REVIEW
 /* internal method to render the travel list */
-const renderTravelDetails = (req, res, responseBody) => {
+/* const renderTravelDetails = (req, res, responseBody) => {
     let message = null;
     let pageTiitle = process.env.npm_package_description + ' - Details';
     if (!(responseBody instanceof Array)) {
@@ -66,10 +66,10 @@ const renderTravelDetails = (req, res, responseBody) => {
             message
         }
     );
-}
+} */
 
 /* GET travel details view */
-const travelDetails = (req, res) => {
+/* const travelDetails = (req, res) => {
     const path = '/api/trips';
     const requestOptions = {
         url: `${apiOptions.server}${path}`,
@@ -86,7 +86,7 @@ const travelDetails = (req, res) => {
             renderTravelList(req, res, body);
         }
     );
-};
+}; */
 
 
 
