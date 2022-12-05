@@ -53,7 +53,7 @@ const tripsAddTrip = async (req, res) => {
         resort: req.body.resort,
         perPerson: req.body.perPerson,
         image: req.body.image,
-        descreption: req.body.descreption
+        description: req.body.description
     },
     (err, trip) => {
         if (err) {
