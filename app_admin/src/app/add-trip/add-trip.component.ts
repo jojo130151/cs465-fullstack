@@ -33,13 +33,15 @@ export class AddTripComponent implements OnInit {
   })
 }
 
+/* Runs after submit button is pressed on add-trip page, 
+   adds trip information to database and navigates user back to list-trips page */
 onSubmit() { 
   this.submitted = true;
   if (this.addForm.valid) { 
     this.tripService.addTrip(this.addForm.value) 
     .then ( data => {
       console.log(data);
-      this.router.navigate(['']); 
+      this.router.navigate(['list-trips']); 
     });
   }
 }

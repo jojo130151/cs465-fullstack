@@ -54,17 +54,21 @@ export class EditTripComponent implements OnInit {
     })
   }
     
+  /* Runs when the submit button on edit-trip page is presssed, 
+  updates trip in database and navigates user back to trips-list page */
   onSubmit() {
     this.submitted = true;
 
     if (this.editForm.valid) { 
       this.tripService.updateTrip(this.editForm.value)
       .then(data => { 
-        console.log(data); 
-        this.router.navigate(['']);
+        console.log(data);
+        console.log("Rerouting to list-trips through edit-component.ts");
+        this.router.navigate(['list-trips']);
       }); 
     }
   }
+
 
   get f() { return this.editForm.controls; }
 }
