@@ -125,6 +125,34 @@ const tripsUpdateTrip = async (req, res) => {
     );
 }
 
+// DELETE: /trips/:tripCode - Delete a trip
+const tripsDeleteTrip = async (req, res) => {
+    // Console messages for testing and debugging
+    console.log("Inside tripsDeleteTrip");
+    console.log(req.params);
+    getUser(req, res,
+        (req, res) => {
+            Trip
+                .findOneAndRemove({ 'code': req.params.tripCode })
+                .exec((err, trip) => {
+                    if (!trip) {
+                        return res
+                            .status(404)
+                            .json({ "message": "trip not found" });
+                    } else if (err) {
+                        return res
+                            .status(404)
+                            .json(err);
+                    } else {
+                        return res
+                            .status(200)
+                            .json(trip);
+                    }
+                });
+        }
+    );
+};
+
 const getUser = (req, res, callback) => {
     // Console message for debugging and testing
     console.log(req.auth);
@@ -151,11 +179,11 @@ const getUser = (req, res, callback) => {
             .json({"message": "User not found"});
     }
 };
- 
 
 module.exports = {
     tripsList,
     tripsFindCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripsDeleteTrip
 };

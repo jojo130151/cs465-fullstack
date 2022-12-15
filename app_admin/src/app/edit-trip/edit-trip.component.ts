@@ -54,19 +54,36 @@ export class EditTripComponent implements OnInit {
     })
   }
     
-  /* Runs when the submit button on edit-trip page is presssed, 
-  updates trip in database and navigates user back to trips-list page */
+  /* Runs when the submit or delete button on edit-trip page is presssed - 
+  updates trip in database and navigates user back to trips-list page or
+  deletes trip from database altogether. */
   onSubmit() {
-    this.submitted = true;
-
-    if (this.editForm.valid) { 
-      this.tripService.updateTrip(this.editForm.value)
-      .then(data => { 
-        console.log(data);
-        console.log("Rerouting to list-trips through edit-component.ts");
-        this.router.navigate(['list-trips']);
-      }); 
+    if (this.submitted == true) {
+      if (this.editForm.valid) {
+        this.tripService.updateTrip(this.editForm.value)
+          .then(data => {
+            console.log(data);
+            console.log("Rerouting to list-trips through edit-component.ts");
+            this.router.navigate(['list-trips']);
+          });
+      }
     }
+    if (this.submitted == false) {
+      this.tripService.deleteTrip(this.editForm.value)
+        .then(data => {
+          console.log(data);
+          console.log("Rerouting to list-trips through edit-component.ts");
+          this.router.navigate(['list-trips']);
+        });
+    }
+  }
+
+  // These functions run before onSubmit() and lets that function know what button was pressed on the edit-trip page
+  onSubmitClick() {
+    this.submitted = true;
+  }
+  onDeleteClick() {
+    this.submitted = false;
   }
 
 
